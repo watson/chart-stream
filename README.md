@@ -3,6 +3,8 @@
 Chart time series data from either STDIN or programmatically from any
 Node.js app in real time directly in your browser.
 
+![chart](https://cloud.githubusercontent.com/assets/10602/20244560/99a7e1e4-a9ca-11e6-809f-0370491106ad.png)
+
 [![Build status](https://travis-ci.org/watson/chart-stream.svg?branch=master)](https://travis-ci.org/watson/chart-stream)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://github.com/feross/standard)
 
