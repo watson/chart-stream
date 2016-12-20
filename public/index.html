@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>chart-stream</title>
+  <link href="/c3.css" rel="stylesheet" type="text/css">
+  <script src="/d3.min.js" charset="utf-8"></script>
+  <script src="/c3.min.js"></script>
+  <style type="text/css">
+    body {
+      margin: 0;
+      padding: 0;
+    }
+    #graph {
+      height: 100vh;
+    }
+  </style>
+</head>
+<body>
+
+<div id="graph">Waiting for data...</div>
+
+<script>
+
+var es = new EventSource('/data')
+var closed = false
+var headers = []
+var chart
+
+es.onmessage = function (ev) {
+  if (closed) return
+  if (ev.data.trim() === '') return
+
+  var rows = parseCsv(ev.data)
+
+  if (!chart) {
+    chart = initChart(rows)
+  } else {
+    append(rows)
+  }
+}
+
+es.addEventListener('end', function () {
+  if (closed) return
+  es.close()
+  closed = true
+}, true)
+
+es.onerror = function (err) {
+  closed = true
+  throw err
+}
+
+function parseCsv (str) {
+  return str
+    .split('\n')
+    .filter(function (line) {
+      return !!line.trim()
+    })
+    .map(function (line) {
+      return line.split(',')
+    })
+}
+
+function hasHeader (rows) {
+  return !/^\d+$/.test(rows[0][0])
+}
+
+function initChart (rows) {
+  var columns = []
+  var showLegend = hasHeader(rows)
+
+  if (showLegend) {
+    rows.shift().forEach(function (head) {
+      headers.push(head)
+      columns.push([head])
+    })
+  } else {
+    for (var i = 0; i < rows[0].length; i++) {
+      headers.push(n)
+      columns.push([n])
+    }
+  }
+
+  rows.forEach(function (row) {
+    row.forEach(function (col, i) {
+      columns[i].push(parseInt(col, 10))
+    })
+  })
+
+  var opts = {
+    bindto: '#graph',
+    data: {
+      columns: columns,
+      type: 'line'
+    },
+    point: { show: false },
+    axis: { x: { show: false } },
+    legend: { show: showLegend }
+  }
+
+  return c3.generate(opts)
+}
+
+function append (rows) {
+  var columns = []
+
+  headers.forEach(function (head, i) {
+    columns.push([head])
+  })
+
+  rows.forEach(function (row) {
+    row.forEach(function (col, i) {
+      columns[i].push(parseInt(col, 10))
+    })
+  })
+
+  chart.flow({
+    columns: columns,
+    length: 0
+  })
+}
+
+</script>
+</body>
+</html>

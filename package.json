@@ -1,0 +1,46 @@
+{
+  "name": "chart-stream",
+  "version": "0.0.0",
+  "description": "Chart time series data from either STDIN or programmatically from any Node.js app in real time directly in your browser",
+  "main": "index.js",
+  "bin": "cli.js",
+  "dependencies": {
+    "ecstatic": "^2.1.0",
+    "opn": "^4.0.2",
+    "pump": "^1.0.2",
+    "readable-stream": "^2.2.2",
+    "sse-stream": "^0.0.5",
+    "standard": "^8.6.0",
+    "tape": "^4.6.3"
+  },
+  "devDependencies": {
+    "csv-write-stream": "^2.0.0",
+    "memory-usage": "^1.0.0",
+    "standard": "^8.6.0",
+    "tape": "^4.6.3"
+  },
+  "scripts": {
+    "test": "standard && node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/watson/chart-stream.git"
+  },
+  "keywords": [
+    "chart",
+    "graph",
+    "plot",
+    "diagram",
+    "line",
+    "time-series",
+    "realtime",
+    "browser",
+    "stream"
+  ],
+  "author": "Thomas Watson Steen <w@tson.dk> (https://twitter.com/wa7son)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/watson/chart-stream/issues"
+  },
+  "homepage": "https://github.com/watson/chart-stream#readme"
+}
