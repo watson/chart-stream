@@ -15,9 +15,7 @@ module.exports = function (cb) {
   sse.install(server)
 
   sse.on('connection', function (client) {
-    pump(input, client, function (err) {
-      if (err) throw err
-    })
+    pump(input, client)
   })
 
   server.listen(function () {
