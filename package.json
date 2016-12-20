@@ -9,9 +9,7 @@
     "opn": "^4.0.2",
     "pump": "^1.0.2",
     "readable-stream": "^2.2.2",
-    "sse-stream": "^0.0.5",
-    "standard": "^8.6.0",
-    "tape": "^4.6.3"
+    "sse-stream": "^0.0.5"
   },
   "devDependencies": {
     "csv-write-stream": "^2.0.0",
