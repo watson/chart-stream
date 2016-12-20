@@ -1,6 +1,6 @@
 {
   "name": "chart-stream",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Chart time series data from either STDIN or programmatically from any Node.js app in real time directly in your browser",
   "main": "index.js",
   "bin": "cli.js",
@@ -44,7 +44,7 @@
   },
   "homepage": "https://github.com/watson/chart-stream#readme",
   "coordinates": [
-    55.68099309999999,
-    12.5643406
+    55.77759831356308,
+    12.59006021838536
   ]
 }
