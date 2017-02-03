@@ -11,11 +11,16 @@ module.exports = function (cb) {
   var input = new PassThrough()
   var server = http.createServer(ecstatic({ root: path.join(__dirname, 'public') }))
   var sse = SSE('/data')
+  var header
 
   sse.install(server)
 
   sse.on('connection', function (client) {
-    pump(input, client)
+    input.once('data', function (chunk) {
+      if (chunk !== header) client.write(header)
+      client.write(chunk)
+      pump(input, client)
+    })
   })
 
   server.listen(function () {
@@ -24,6 +29,10 @@ module.exports = function (cb) {
   })
 
   server.unref()
+
+  input.once('data', function (chunk) {
+    header = chunk
+  })
 
   return input
 }
