@@ -95,7 +95,10 @@ function initChart (rows) {
       type: 'line'
     },
     point: { show: false },
-    axis: { x: { show: false } },
+    axis: {
+      x: { show: false },
+      y: { tick: { format: d3.format('0,000') } }
+    },
     legend: { show: showLegend }
   }
 
